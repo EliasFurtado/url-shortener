@@ -21,12 +21,12 @@ public class BaseConversion {
     }
 
     public long decode (String input) {
-        var characters = input.toCharArray();
-        var length = characters.length;
+        char[] characters = input.toCharArray();
+        int length = characters.length;
 
-        var decoded = 0;
+        int decoded = 0;
 
-        var counter = 1;
+        int counter = 1;
 
         for (int i = 0; i < length; i++) {
             decoded += allowedString.indexOf(characters[i]) * Math.pow(base, length - counter);
