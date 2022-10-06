@@ -1,6 +1,6 @@
 package br.com.eliasfurtado.UrlShortener.services;
 
-public class BaseConversionService {
+public class BaseConversion {
     private final String allowedString = "0123456789ABCDEFGHIKJLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final char[] allowedCharacters = allowedString.toCharArray();
     private final int base = allowedCharacters.length;
