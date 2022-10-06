@@ -5,17 +5,18 @@ import br.com.eliasfurtado.UrlShortener.entity.Url;
 import br.com.eliasfurtado.UrlShortener.repositories.UrlRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 
 @Service
 public class UrlService {
 
     private final UrlRepository urlRepository;
-    private final BaseConversion baseConversion;
+    private final BaseConversion conversion;
 
-    public UrlService(UrlRepository urlRepository, BaseConversion conversion) {
+    public UrlService(UrlRepository urlRepository, BaseConversion baseConversion) {
         this.urlRepository = urlRepository;
-        this.baseConversion = conversion;
+        this.conversion = baseConversion;
     }
 
     public String convertToShortUrl(UrlLongRequest request) {
@@ -25,6 +26,16 @@ public class UrlService {
 
         Url entity = urlRepository.save(url);
 
-        return baseConversion.encode(entity.getId());
+        return conversion.encode(entity.getId());
+    }
+
+    public String getOriginalUrl(String shorUrl) {
+        long id = conversion.decode(shorUrl);
+
+        var entity = urlRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("There is no entity with " + id));
+
+        return entity.getLongUrl();
+
     }
 }
