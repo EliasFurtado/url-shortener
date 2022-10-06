@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BaseConversion {
-    private final String allowedString = "0123456789ABCDEFGHIKJLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private final String allowedString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private final char[] allowedCharacters = allowedString.toCharArray();
     private final int base = allowedCharacters.length;
 
@@ -16,7 +16,7 @@ public class BaseConversion {
         }
 
         while(input > 0) {
-            encodedString.append(String.valueOf((int) input % base));
+            encodedString.append(allowedCharacters[(int) input % base]);
             input = input / base;
         }
 
