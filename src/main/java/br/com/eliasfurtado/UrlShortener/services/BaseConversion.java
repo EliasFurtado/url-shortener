@@ -1,5 +1,8 @@
 package br.com.eliasfurtado.UrlShortener.services;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BaseConversion {
     private final String allowedString = "0123456789ABCDEFGHIKJLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final char[] allowedCharacters = allowedString.toCharArray();
